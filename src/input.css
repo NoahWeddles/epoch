@@ -1,0 +1,48 @@
+@import "tailwindcss";
+
+.tab {
+    @apply cursor-pointer p-2 text-center rounded bg-main2 text-main1 hover:brightness-120;
+}
+.button{
+    position: relative;
+    display: inline-block;
+}
+
+.tech_tooltip {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition:
+        opacity 0.1s ease,
+        visibility 0s linear 0.1s;
+}
+
+.technology_button:hover .tech_tooltip {
+    opacity: 1;
+    visibility: visible;
+    transition:
+        opacity 0.6s ease,
+        visibility 0s linear 0.1s;
+    pointer-events: auto;
+}
+
+.dragging {
+    cursor: grabbing;
+}
+@theme {
+    --color-main1: #E9EAAE;
+    --color-main2: var(--color-neutral-900);;
+    --color-main3: #4A001F;
+    --font-main: 'main', sans-serif;
+}
+@font-face {
+    font-family: 'main';
+    src: url('main.ttf') format('truetype');
+    font-style: normal;
+    
+}
+@layer base {
+    *{
+        @apply text-main1 font-main
+    }
+}

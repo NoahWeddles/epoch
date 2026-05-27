@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Epoch</title>
+  <script type="module" crossorigin src="/assets/index-BRmESBAZ.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-BK8JXIuV.css">
+</head>
+<body>
+    <div class="bg-neutral-900 h-screen flex items-center justify-between p-10">
+        <div class="flex flex-col w-full h-full justify-start max-w-md rounded-2xl p-5">
+
+            <ul class="tab-bar flex gap-4">
+                <!-- <button onclick="localStorage.clear()">Clear Localstorage</button> -->
+            </ul>
+
+
+            <hr class="mt-2">
+
+
+
+
+            <div class="display pt-5 gap-4 flex flex-col h-full w-full rounded-b-2xl">
+            </div>
+
+
+
+
+            <template id="home">
+                <p class="population">Population: 0</p>
+                <div style="display: none;" class="flex gap-4 soldier-event">
+                    <p class="soldiers">Soldiers: 0</p>
+                    <button class="add-soldier">+</button>
+                    <button class="remove-soldier">-</button>
+                </div>
+                <div style="display: none;" class="flex gap-4 farmer-event">
+                    <p class="farmers">Farmers: 0</p>
+                    <button class="add-farmer">
+                        <span class="hover:scale-150">+</span>
+                    </button>
+                    <button class="remove-farmer">-</button>
+                </div>
+                <div style="display: none;" class="max-w-full farmer-event">
+                    <hr  class="harvest-progress border-emerald-600 w-0 rounded-full">
+                </div>
+
+                <button is="timeout-button" timeout="1000" class="gather-food p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">
+                    <p class="">Gather Food</p>
+                </button>
+                <button is="timeout-button" timeout="5000" class="make-person p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">
+                    <p class="">Make Person</p>
+                </button>
+            </template>
+
+
+
+            <template id="conquest">
+                <h1 class="font-bold">Settings</h1>
+                <p>Configure your preferences for Epoch.
+            </template>
+
+
+
+            <template id="settings">
+                <h1 class="font-bold">Settings</h1>
+                <p>Configure your preferences for Epoch.
+            </template>
+        </div>
+
+
+        <div class="w-full ml-auto h-full flex-col p-5 justify-start rounded-2xl items-start gap-4">
+            <ul class="sub-tab-bar flex gap-4">
+            </ul>
+            <hr class="mt-2">
+            <div class="sub-display pt-5 gap-4 flex flex-col h-full w-full">
+            </div>
+            <template id="farms">
+                <h1 class="font-bold">Settings</h1>
+                <p>Configure your preferences for Epoch.
+            </template>
+            <template id="research">
+                <canvas class="canvas">
+                </canvas>
+            </template>
+        </div>
+
+
+        <div class="w-full ml-auto h-full max-w-xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
+            <div class="flex">
+                <p class="p-2">Storage</p>
+            </div>
+            <hr class="mt-2">
+            <div class="storage-display flex-col justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
+                <p class="food">Food: 0</p>
+                <div class="max-w-full">
+                    <hr class="food-depletion-progress border-orange-700 w-0 rounded-full">
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="w-full h-full max-w-3xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
+            <div class="flex">
+                <p class="p-2">Events</p>
+                <button class="clear-button ml-auto">Clear</button>
+            </div>
+            <hr class="mt-2">
+            <div class="dialogue-box flex-col justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
+
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

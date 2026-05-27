@@ -3,11 +3,160 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="src/main.js"></script>
     <title>Epoch</title>
 </head>
-<body>
-    
+<body class="overflow-hidden">
+    <div class="bg-neutral-900 h-screen flex items-center justify-between p-10 ">
+        <div class="flex flex-col w-full h-full justify-start max-w-md rounded-2xl p-5">
+
+            <ul class="tab-bar flex gap-4">
+                <button onclick="localStorage.clear()">Clear Localstorage</button>
+            </ul>
+
+            <script type="module" src="./src/scripts/tab.ts"></script>
+
+            <hr class="mt-2">
+
+
+
+
+            <div class="display pt-5 gap-4 flex flex-col h-full w-full rounded-b-2xl">
+            </div>
+
+
+
+
+            <template id="home">
+                <button is="timeout-button" timeout="1" class="make-person p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">
+                    <p class="">Make Person</p>
+                </button>
+
+            </template>
+
+
+
+            <template id="conquest">
+                <h1 class="font-bold">Settings</h1>
+                <p>Configure your preferences for Epoch.
+            </template>
+
+
+
+            <template id="settings">
+                <h1 class="font-bold">Settings</h1>
+                <p>Configure your preferences for Epoch.
+            </template>
+        </div>
+
+
+        <div class="w-full ml-auto h-full flex-col p-5 justify-start rounded-2xl items-start gap-4">
+            <ul class="sub-tab-bar flex gap-4">
+            </ul>
+
+            <hr class="mt-2">
+            
+            <div class="sub-display pt-5 gap-4 flex flex-col h-full w-full overflow-hidden">
+            </div>
+
+            <template id="farms">
+                <div class="flex flex-col items-start justify-start gap-4">
+                    <div style="display: none;" class="flex gap-4 farmer-event">
+                        <p class="farmers">Farmers: 0</p>
+                    </div>
+                    <hr class="harvest-progress border-emerald-600 w-0 rounded-full">
+                    <button is="timeout-button" timeout="1000" class="gather-food p-2 bg-main2 hover:brightness-120 rounded-lg">
+                        <p class="">Gather Food</p>
+                    </button>
+                </div>
+            </template>
+
+            <template id="research">
+                <div class="viewport border-2 border-main1 relative w-full h-full overflow-hidden">
+                    <div class="world relative">
+
+                    </div>
+                    <template class="technology" id="technology">
+                        <div class="absolute technology_button hover:brightness-110 active:brightness-80 flex h-15 w-35 gap-2 border-2 border-main1">
+                            <p class="name"></p>
+                            <p class="cost"></p>
+                            <span class="tech_tooltip description absolute left-45 p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2"></span>
+                        </div>
+                    </template>
+                </div>
+            </template>
+            <template id="forage">
+                <div class="flex flex-col items-start justify-start gap-4">
+                    <p style="display:none" class="foragers forager-event">Foragers: 0</p>
+                    <hr style="display:none" class="forage-progress forager-event border-emerald-600 w-0 rounded-full">
+                    <button is="timeout-button" timeout="1000" class="forage-button p-2 bg-main2 hover:brightness-120 rounded-lg">
+                        <p class="">Forage</p>
+                    </button>
+                </div>
+            </template>
+            <template id="government">
+                <div class="flex flex-col items-start justify-start gap-4">
+                    <p class="population">Population: 0</p>
+                    <hr class="population-progress border-emerald-600 w-0 rounded-full">
+                    <hr class="border-main1 w-1/2">
+                    <div style="display: none;" class="flex gap-4 soldier-event">
+                        <p class="soldiers">Soldiers: 0</p>
+                        <button class="button add-soldier">+</button>
+                        <button class="button remove-soldier">-</button>
+                    </div>
+                    
+                    <div style="display: none;" class="flex gap-4 farmer-event">
+                        <p class="farmers">Farmers: 0</p>
+                        <button class="button add-farmer">
+                            <span class="hover:scale-150">+</span>
+                        </button>
+                        <button class="button remove-farmer">-</button>
+                    </div>
+                    
+                    <div style="display: none;" class="flex gap-4 forager-event">
+                        <p class="foragers">Foragers: 0</p>
+                        <button class="button add-forager">
+                            <span class="hover:scale-150">+</span>
+                        </button>
+                        <button class="button remove-forager">-</button>
+                    </div>
+                </div>
+            </template>
+        </div>
+
+
+        <div class="w-full ml-auto h-full max-w-xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
+            <div class="flex">
+                <p class="p-2">Storage</p>
+            </div>
+            <hr class="mt-2">
+            <div class="storage-display flex flex-col gap-4 justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
+                <p class="food">Food: 0</p>
+                <hr class="food-depletion-progress border-orange-700 w-0 rounded-full">
+
+                <p class="ore">Ore: 0</p>
+
+                <p class="wood">Wood: 0</p>
+
+                <p class="stone">Stone: 0</p>
+            </div>
+            <script type="module" src="./src/scripts/storage.ts"></script>
+        </div>
+
+        
+        <div class="w-full h-full max-w-3xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
+            <div class="flex">
+                <p class="p-2">Events</p>
+                <button class="clear-button ml-auto">Clear</button>
+            </div>
+            <hr class="mt-2">
+            <div class="dialogue-box flex-col justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
+
+            </div>
+        </div>
+
+        <script type="module" src="./src/scripts/event_dialogue.ts"></script>
+    </div>
+    <script type="module" src="./src/scripts/main.ts"></script>
+    <script type="module" src="./src/scripts/events.ts"></script>
 </body>
 </html>
