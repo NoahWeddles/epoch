@@ -34,12 +34,12 @@ export function init(): void {
     let available = playerData.population - playerData.farmers - playerData.soldiers;
 
     if (unlocked_events.farmer_unlock) {
-        document.querySelectorAll<HTMLElement>(".farmer-event").forEach(el => { el.style.display = "" });
+        document.querySelectorAll<HTMLElement>(".farmer-event").forEach((el) => el.style.display = "");
     }
     if (unlocked_events.soldier_unlock) {
-        document.querySelectorAll<HTMLElement>(".soldier-event").forEach(el => { el.style.display = "" });
+        document.querySelectorAll<HTMLElement>(".soldier-event").forEach((el) => el.style.display = "");
     }
     if (unlocked_events.forager_unlock) {
-        document.querySelectorAll<HTMLElement>(".forager-event").forEach(el => { el.style.display = "" });
+        document.querySelectorAll<HTMLElement>(".forager-event").forEach((el) => el.style.display = "");
     }
 }

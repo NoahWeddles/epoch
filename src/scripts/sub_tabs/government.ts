@@ -2,14 +2,14 @@ import { unlocked_events } from "../events";
 import { playerData, PLAYER_FIELDS } from "../player_data";
 
 let OCCUPATION_KEYS = (Object.keys(PLAYER_FIELDS) as (keyof typeof PLAYER_FIELDS)[])
-    .filter(k => PLAYER_FIELDS[k].type === "occupation");
+    .filter(k => (PLAYER_FIELDS[k] as { type?: string }).type === "occupation");
 
 let available = playerData.population - OCCUPATION_KEYS.reduce((sum, k) => sum + playerData[k], 0);
 
 function change_population(delta: number){
     playerData.population += delta
     OCCUPATION_KEYS = (Object.keys(PLAYER_FIELDS) as (keyof typeof PLAYER_FIELDS)[])
-        .filter(k => PLAYER_FIELDS[k].type === "occupation");
+        .filter(k => (PLAYER_FIELDS[k] as { type?: string }).type === "occupation");
     available = playerData.population - OCCUPATION_KEYS.reduce((sum, k) => sum + playerData[k], 0);
 }
 
@@ -31,13 +31,13 @@ setInterval(() => {
 
 export function init(): void {
     if (unlocked_events.farmer_unlock) {
-        document.querySelectorAll<HTMLElement>(".farmer-event").forEach(el => { el.style.display = "" });
+        document.querySelectorAll<HTMLElement>(".farmer-event").forEach((el) => el.style.display = "");
     }
     if (unlocked_events.soldier_unlock) {
-        document.querySelectorAll<HTMLElement>(".soldier-event").forEach(el => { el.style.display = "" });
+        document.querySelectorAll<HTMLElement>(".soldier-event").forEach((el) => el.style.display = "");
     }
     if (unlocked_events.forager_unlock) {
-        document.querySelectorAll<HTMLElement>(".forager-event").forEach(el => { el.style.display = "" });
+        document.querySelectorAll<HTMLElement>(".forager-event").forEach((el) => el.style.display = "");
     }
 
     const progress_bar = document.querySelector<HTMLElement>(".population-progress")!;
@@ -45,7 +45,7 @@ export function init(): void {
         progress_bar.style.width = `${timer * 100}%`;
     };
 
-    document.querySelector(".make-person")!
+    document.querySelector<HTMLElement>(".make-person")!
         .addEventListener("timeout-click", () => {
             //this still invokes the cooldown
             if (playerData.food < 50) return;
@@ -53,37 +53,37 @@ export function init(): void {
             playerData.food -= 50;
         });
 
-    document.querySelector(".add-farmer")!
+    document.querySelector<HTMLElement>(".add-farmer")!
         .addEventListener("click", () => {
             if (available <= 0) return;
             playerData.farmers += 1;
             available -= 1;
         });
-    document.querySelector(".remove-farmer")!
+    document.querySelector<HTMLElement>(".remove-farmer")!
         .addEventListener("click", () => {
             if (playerData.farmers === 0) return;
             playerData.farmers -= 1;
             available += 1;
         });
-    document.querySelector(".add-soldier")!
+    document.querySelector<HTMLElement>(".add-soldier")!
         .addEventListener("click", () => {
             if (available <= 0) return;
             playerData.soldiers += 1;
             available -= 1;
         });
-    document.querySelector(".remove-soldier")!
+    document.querySelector<HTMLElement>(".remove-soldier")!
         .addEventListener("click", () => {
             if (playerData.soldiers === 0) return;
             playerData.soldiers -= 1;
             available += 1;
         });
-    document.querySelector(".add-forager")!
+    document.querySelector<HTMLElement>(".add-forager")!
         .addEventListener("click", () => {
             if (available <= 0) return;
             playerData.foragers += 1;
             available -= 1;
         });
-    document.querySelector(".remove-forager")!
+    document.querySelector<HTMLElement>(".remove-forager")!
         .addEventListener("click", () => {
             if (playerData.foragers === 0) return;
             playerData.foragers -= 1;

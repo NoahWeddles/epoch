@@ -1,64 +1,72 @@
 interface PlayerFieldConfig {
     default: number;
     type?: string;
-    selector: string;
+    id: string;
     format: (x: number) => string;
 }
 
 export const PLAYER_FIELDS = {
     population: {
         default: 5,
-        selector: ".population",
+        id: "population",
         format: (x: number) => `Population: ${x}`,
     },
     farmers: {
         type: "occupation",
         default: 0,
-        selector: ".farmers",
+        id: "farmers",
         format: (x: number) => `Farmers: ${x}`,
     },
     soldiers: {
         type: "occupation",
         default: 0,
-        selector: ".soldiers",
+        id: "soldiers",
         format: (x: number) => `Soldiers: ${x}`,
     },
     foragers:{
         type: "occupation",
         default: 0,
-        selector: ".foragers",
+        id: "foragers",
         format: (x: number) => `Foragers: ${x}`
     },
 
     // ---------------------------------------------
 
+    farms: {
+        default: 0,
+        id: "farms",
+        format: (x: number) => `Farms: ${x}`
+    },
+
     food: {
         default: 25,
-        selector: ".food",
+        id: "food",
         format: (x: number) => `Food: ${x}`,
     },
 
+    // ---------------------------------------------
+
     wood: {
         default: 0,
-        selector: ".wood",
+        id: "wood",
         format: (x: number) => `Wood: ${x}`,
     },
     stone: {
         default: 0,
-        selector: ".stone",
+        id: "stone",
         format: (x: number) => `Stone: ${x}`,
     },
     ore: {
         default: 0,
-        selector: ".ore",
+        id: "ore",
         format: (x: number) => `Ore: ${x}`,
     },
-    
+
     // ---------------------------------------------
 
     research_points: {
-        default: 10,
-        selector: ".research",
+        default: 50,
+        id: "research-points",
         format: (x:number) => `Research Points: ${x}`,
     },
 } satisfies Record<string, PlayerFieldConfig>;
@@ -98,11 +106,13 @@ function createPlayerData(fields: typeof PLAYER_FIELDS): PlayerData {
 
             target[k] = value;
             localStorage.setItem("playerData", JSON.stringify(target));
+            console.log(target)
+            console.log(key)
+            console.log(value)
 
-            const { selector, format } = fields[k];
-            const els = document.querySelectorAll(selector);
-            els.forEach((el) => {
-                if (el) el.textContent = format(value);
+            const { id, format } = fields[k];
+            document.querySelectorAll<HTMLElement>(`.${id}`).forEach((el) => {
+                el.textContent = format(value);
             });
 
             return true;
@@ -122,9 +132,9 @@ function createPlayerData(fields: typeof PLAYER_FIELDS): PlayerData {
 export const playerData: PlayerData = (() => {
     const proxy = createPlayerData(PLAYER_FIELDS);
     const saved = localStorage.getItem("playerData");
-    if (saved) {
-        const parsed = JSON.parse(saved) as Partial<PlayerData>;
-        Object.assign(proxy, parsed);
+    const parsed = saved ? (JSON.parse(saved) as Partial<PlayerData>) : {};
+    for (const key of Object.keys(PLAYER_FIELDS) as (keyof PlayerData)[]) {
+        proxy[key] = parsed[key] ?? PLAYER_FIELDS[key].default;
     }
     return proxy;
 })();

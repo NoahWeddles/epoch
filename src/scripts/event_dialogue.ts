@@ -1,7 +1,7 @@
 const stored = localStorage.getItem("dialogue");
 let events: string[] = stored ? JSON.parse(stored) : [];
 
-const clearButton = document.querySelector(".clear-button")!;
+const clearButton = document.querySelector<HTMLElement>(".clear-button")!;
 
 clearButton.addEventListener("click", () => {
     events = [];
@@ -16,7 +16,7 @@ export function add_event(event: string): void {
 }
 
 function update(animateFirst = false): void {
-    const dialogueBox = document.querySelector(".dialogue-box")!;
+    const dialogueBox = document.querySelector<HTMLElement>(".dialogue-box")!;
     dialogueBox.replaceChildren();
     for (let i = 0; i < events.length; i++) {
         const event = events[i];

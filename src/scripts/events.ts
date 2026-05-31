@@ -9,33 +9,6 @@ interface ThresholdEvent {
 }
 
 const threshold_events: Record<string, ThresholdEvent> = {
-    farmer_unlock: {
-        message: "Use farmers to gather food.",
-        fields: ["population"],
-        thresholds: [10],
-        action: () => {
-            console.log("Unlocking farmers");
-            document.querySelectorAll<HTMLElement>(".farmer-event").forEach(el => { el.style.display = "" });
-        },
-    },
-    soldier_unlock: {
-        message: "Use soldiers to defend your settlement, and expand your territory.",
-        fields: ["food"],
-        thresholds: [1000],
-        action: () => {
-            console.log("Unlocking soldiers");
-            document.querySelectorAll<HTMLElement>(".soldier-event").forEach(el => { el.style.display = "" });
-        },
-    },
-    forager_unlock: {
-        message: "Foragers will gather important resources.",
-        fields: ["population", "food"],
-        thresholds: [15, 500],
-        action: () => {
-            console.log("Unlocking soldiers");
-            document.querySelectorAll<HTMLElement>(".soldier-event").forEach(el => { el.style.display = "" });
-        },
-    },
 };
 
 const stored_unlocked = localStorage.getItem("unlocked_events");
@@ -61,11 +34,6 @@ const misc_events: Record<string, MiscEvent> = {
     },
 };
 
-Object.keys(unlocked_events).forEach(key => {
-    if (unlocked_events[key]) {
-        threshold_events[key].action();
-    }
-});
 
 setInterval(() => {
     for (const event_key in threshold_events) {

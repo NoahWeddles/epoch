@@ -16,7 +16,7 @@ interface SubPage {
 const pages: Record<string, Record<string, SubPage>> = {
     Home: {
         Farms:      { templateId: "farms",      module: farms },
-        Government: { templateId: "government", module: government },
+        Gov: { templateId: "government", module: government },
         Research:   { templateId: "research",   module: research },
         Forage: { templateId: "forage", module: forage}
     },
@@ -27,15 +27,31 @@ const pages: Record<string, Record<string, SubPage>> = {
 
 let active_cleanup: (() => void) | null = null;
 
+let active_tab: String | null = null
+
 export function set_bar(pageName: string): void {
-    const tab_bar = document.querySelector(".sub-tab-bar")!;
+    const tab_bar = document.querySelector<HTMLElement>(".sub-tab-bar")!;
     tab_bar.innerHTML = "";
+
+    let tabs: HTMLElement[] = []
 
     Object.keys(pages[pageName]).forEach((key) => {
         const tab = document.createElement("li");
-        tab.classList.add("tab");
+        tab.classList.add("sub-tab");
+        tabs.push(tab)
+
+        if (key == active_tab){
+            tab.classList.add("active-sub-tab")
+        }
+
         tab.addEventListener("click", () => {
-            console.log(key);
+            tab.classList.add("active-sub-tab")
+            active_tab = key
+            tabs.forEach((t) => {
+                if (t !== tab) {
+                    t.classList.remove("active-sub-tab")
+                }
+            })
             switch_tab(pageName, key);
         });
         tab.textContent = key;
@@ -44,16 +60,19 @@ export function set_bar(pageName: string): void {
 }
 
 function switch_tab(pageName: string, tabName: string): void {
+
+    research.doActions()
+
     if (active_cleanup) {
         active_cleanup();
         active_cleanup = null;
     }
 
-    const display = document.querySelector(".sub-display")!;
+    const display = document.querySelector<HTMLElement>(".sub-display")!;
     display.innerHTML = "";
 
     const page = pages[pageName][tabName];
-    const template = document.querySelector<HTMLTemplateElement>(`#${page.templateId}`)!;
+    const template = document.querySelector<HTMLTemplateElement>(`template.${page.templateId}`)!;
     display.appendChild(template.content.cloneNode(true));
 
     if (page.module?.init) {

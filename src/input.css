@@ -1,7 +1,17 @@
 @import "tailwindcss";
 
 .tab {
-    @apply cursor-pointer p-2 text-center rounded bg-main2 text-main1 hover:brightness-120;
+    @apply cursor-pointer p-2 h-max w-20 flex text-center justify-center border-b-2 border-transparent items-center text-main0 hover:brightness-120;
+}
+/* adds italic for now */
+.sub-tab {
+    @apply italic cursor-pointer p-2 h-max w-20 flex text-center justify-center border-b-2 border-transparent items-center text-main0 hover:brightness-120;
+}
+.active-tab {
+    @apply text-main1 border-main1 transition-all duration-300 bg-main2;
+}
+.active-sub-tab {
+    @apply transition-all duration-300 brightness-80 text-main1 italic;
 }
 .button{
     position: relative;
@@ -29,10 +39,20 @@
 .dragging {
     cursor: grabbing;
 }
+
+body:not(.tech-metal_working) .metal_working_unlocked,
+body:not(.tech-basic_military) .basic_military_unlocked,
+body:not(.tech-agriculture) .agriculture_unlocked {
+    display: none;
+}
 @theme {
-    --color-main1: #E9EAAE;
-    --color-main2: var(--color-neutral-900);;
-    --color-main3: #4A001F;
+    --color-main1: #d9c06d;
+    --color-hr: #212129;
+    --color-main0: #424240;
+    --color-main2ish: #131317;
+    --color-main2ishish: #0f0f12;
+    --color-main2: var(--color-zinc-900);
+    --color-main3: var(--color-zinc-950);
     --font-main: 'main', sans-serif;
 }
 @font-face {
@@ -42,7 +62,10 @@
     
 }
 @layer base {
+    body {
+        font-family: Georgia, serif;
+    }
     *{
-        @apply text-main1 font-main
+        @apply text-main1 text-sm
     }
 }

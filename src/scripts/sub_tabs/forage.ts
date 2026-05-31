@@ -1,6 +1,7 @@
 import { playerData, type PlayerData } from "../player_data";
 import { add_event } from "../event_dialogue";
 import { unlocked_events } from "../events";
+import { unlocked_technologies } from "./research";
 
 interface Forageable{
     chance: number;
@@ -15,7 +16,7 @@ const forageables: Record<string, Forageable> = {
         max: 3,
     },
     "wood": {
-        chance: 0.1,
+        chance: 1,
         min: 10,
         max: 20
     },
@@ -31,14 +32,14 @@ let forage_timer = 0;
 let set_forage_progress_bar: ((timer: number) => void) | null = null;
 
 export function init(){
-    document.querySelector(".forage-button")!.addEventListener("timeout-click", forage);
+    document.querySelector<HTMLElement>(".forage-button")!.addEventListener("timeout-click", forage);
     const forage_progress_bar = document.querySelector<HTMLElement>(".forage-progress")!;
     set_forage_progress_bar = (timer: number) => {
         forage_progress_bar.style.width = `${timer * 100}%`;
     };
 
     if (unlocked_events.forager_unlock) {
-        document.querySelectorAll<HTMLElement>(".forager-event").forEach(el => { el.style.display = "" });
+        document.querySelectorAll<HTMLElement>(".forager-event").forEach((el) => el.style.display = "");
     }
 }
 setInterval(() => {
@@ -56,6 +57,8 @@ function forage() : void {
     const keys = Object.keys(forageables) as Array<keyof PlayerData>
     keys.forEach((key)=>{
         const forageable = forageables[key]
+
+        if (String(key) == "ore" && !unlocked_technologies["metal_working"]) return;
 
         if(Math.random() < forageable.chance){
             playerData[key] += Math.floor(Math.random()* (forageable.max - forageable.min + 1) + forageable.min)

@@ -1,3 +1,5 @@
+import { playerData } from "../player_data";
+
 interface Technology {
     id: string;
     display: string;
@@ -15,9 +17,28 @@ const technologies: Array<Technology> = [
         display: "Metal Working",
         researchCost: 10,
         action: () => {
-
+            document.body.classList.add("tech-metal_working");
         },
         description: "Allows the use of metals and alloys, stronger than the primitive materials. Unlocks the ability to forage for small amounts of ore"
+    },
+    {
+        id: "basic_military",
+        display: "Basic Military",
+        researchCost: 25,
+        requiredTech: ["metal_working", "agriculture"],
+        action: () => {
+            document.body.classList.add("tech-basic_military");
+        },
+        description: "Allows the formation of a rudimentary military. Unlocks soldiers and conquest functionality."
+    },
+    {
+        id: "agriculture",
+        display: "Agriculture",
+        researchCost: 5,
+        action: () => {
+            document.body.classList.add("tech-agriculture");
+        },
+        description: "Grants the ability to cultivate crops. Unlocks farms."
     },
     {
         id: "pottery",
@@ -35,12 +56,25 @@ export const unlocked_technologies: Record<string, boolean> = stored_unlocked
     ? JSON.parse(stored_unlocked)
     : Object.fromEntries(technologies.map(tech => [tech.id, false]));
 
+export function doActions(){
+    Object.entries(unlocked_technologies).forEach(([id, unlocked]) => {
+        if (unlocked) technologies.find(tech => tech.id == id)?.action()
+    })
+}
+doActions();
+
 const CARD_W = 140;
 const CARD_H = 52;
-const COL_GAP = 500;
-const ROW_GAP = 400;
+const COL_GAP = 300;
+const ROW_GAP = 200;
+
+document.querySelector(".give-research")?.addEventListener("click", ()=>{
+    playerData.research_points += 1
+    console.log(playerData.research_points + " gave 1 research point")
+})
 
 export function init(): void {
+
     const viewport = document.querySelector<HTMLElement>(".viewport")!;
     const world = document.querySelector<HTMLElement>(".world")!;
 
@@ -149,7 +183,7 @@ function parentMidY(tech: Technology): number {
 }
 
 function drawTechnologies(world: HTMLElement): void {
-    const template = document.querySelector<HTMLTemplateElement>("#technology")!;
+    const template = document.querySelector<HTMLTemplateElement>("template.technology")!;
 
     for (const tech of technologies) {
         const frag = template.content.cloneNode(true) as DocumentFragment;
@@ -172,8 +206,22 @@ function drawTechnologies(world: HTMLElement): void {
 }
 
 function unlockTechnology(tech: Technology): void{
-    unlocked_technologies[tech.id] = true
-    localStorage.setItem("unlocked_technologies", JSON.stringify(unlocked_technologies));
+    let can_unlock : boolean = true
+
+    if (playerData.research_points < tech.researchCost) can_unlock = false;
+    if (unlocked_technologies[tech.id] === true) can_unlock = false;
+
+    tech.requiredTech?.forEach(id => {
+        if(!unlocked_technologies[id]) can_unlock = false
+    });
+
+    if (can_unlock){
+        unlocked_technologies[tech.id] = true
+        localStorage.setItem("unlocked_technologies", JSON.stringify(unlocked_technologies));
+        playerData.research_points -= tech.researchCost
+
+        tech.action()
+    }
 }
 
 function drawConnections(world: HTMLElement): void {
