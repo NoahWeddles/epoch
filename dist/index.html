@@ -3,114 +3,185 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Epoch</title>
-  <script type="module" crossorigin src="/assets/index-BRmESBAZ.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-BK8JXIuV.css">
+  <script type="module" crossorigin src="/assets/index-PtsfHkDq.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Dp96FRTa.css">
 </head>
-<body>
-    <div class="bg-neutral-900 h-screen flex items-center justify-between p-10">
-        <div class="flex flex-col w-full h-full justify-start max-w-md rounded-2xl p-5">
-
-            <ul class="tab-bar flex gap-4">
-                <!-- <button onclick="localStorage.clear()">Clear Localstorage</button> -->
-            </ul>
-
-
-            <hr class="mt-2">
-
-
-
-
-            <div class="display pt-5 gap-4 flex flex-col h-full w-full rounded-b-2xl">
-            </div>
+<body class="overflow-hidden">
+    <div class="flex flex-col w-full h-screen">
+        <div class="header p-6 pl-3 flex items-center justify-start w-full h-10 bg-main3">
+            <span class="italic text-[22px]">Epoch</span>
+            <span class="mute ml-auto">Mute Music</span>
+        </div>
+        <hr class="text-hr">
+        <div class="main-tab-bar pl-3 pt-0 flex items-center list-none justify-start w-full h-12 bg-main2ish">
+        </div>
+        <div class="sub-tab-bar pl-8 flex items-center list-none justify-start w-full h-9 bg-main2ishish">
+        </div>
+        <hr class="text-hr">
+        <div class="bg-radial-[at_50%_150%] from-main2 to-main3 h-full flex items-center justify-between p-x-10">
+            <div class="flex flex-col w-full h-full justify-start max-w-md rounded-2xl p-5">
 
 
 
+                <div class="display pt-5 gap-4 flex flex-col h-full w-full rounded-b-2xl">
 
-            <template id="home">
-                <p class="population">Population: 0</p>
-                <div style="display: none;" class="flex gap-4 soldier-event">
-                    <p class="soldiers">Soldiers: 0</p>
-                    <button class="add-soldier">+</button>
-                    <button class="remove-soldier">-</button>
                 </div>
-                <div style="display: none;" class="flex gap-4 farmer-event">
-                    <p class="farmers">Farmers: 0</p>
-                    <button class="add-farmer">
-                        <span class="hover:scale-150">+</span>
+
+
+
+
+                <template class="home">
+                    <button is="timeout-button" timeout="1"
+                        class="make-person p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">
+                        <p class="">Make Person</p>
                     </button>
-                    <button class="remove-farmer">-</button>
+
+                </template>
+
+
+
+                <template class="conquest">
+                    <p>Stand Ready For My Arrival Worms</p>
+                </template>
+
+
+
+                <template class="settings">
+                    <h1 class="font-bold">Settings</h1>
+                    <button onclick="localStorage.clear()" class="reset p-2 bg-main2 hover:brightness-120 rounded-lg">
+                        <p class="">Reset</p>
+                    </button>
+                </template>
+            </div>
+
+
+            <div class="w-full ml-auto h-full flex-col justify-start rounded-2xl items-start">
+                <div class="sub-display p-5 gap-4 flex flex-col h-full w-full overflow-hidden">
                 </div>
-                <div style="display: none;" class="max-w-full farmer-event">
-                    <hr  class="harvest-progress border-emerald-600 w-0 rounded-full">
+                <template class="farms">
+                    <div class="flex flex-col items-start justify-start gap-4">
+                        <button is="timeout-button" timeout="1000" class="gather-food p-2 bg-main2 hover:brightness-120 rounded-lg">
+                            <p class="">Gather Food</p>
+                        </button>
+                        <button class="agriculture_unlocked p-2 bg-main2 hover:brightness-120 rounded-lg">
+                            <p class="make-farm">Make Farm</p>
+                        </button>
+                        <div class="agriculture_unlocked flex gap-4">
+                            <p class="farmers">Farmers: 0</p>
+                        </div>
+                        <div class="agriculture_unlocked flex gap-4">
+                            <p class="farms">Farms: 0</p>
+                        </div>
+                        <hr class="harvest-progress agriculture_unlocked border-emerald-600 w-0 rounded-full">
+                    </div>
+                </template>
+
+                <template class="research">
+                    <div class="viewport border-2 border-main1 relative w-full h-full overflow-hidden">
+                        <div class="world relative">
+
+                        </div>
+                        <template class="technology">
+                            <div
+                                class="absolute technology_button hover:brightness-110 active:brightness-80 flex h-15 w-35 p-2 gap-2 border-2 border-main1">
+                                <p class="name"></p>
+                                <p class="cost"></p>
+                                <span
+                                    class="tech_tooltip description absolute left-45 p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2"></span>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                <template class="forage">
+                    <div class="flex flex-col items-start justify-start gap-4">
+                        <div class="forager-event contents" style="display: none;">
+                            <p class="foragers">Foragers: 0</p>
+                            <hr class="forage-progress border-emerald-600 w-0 rounded-full">
+                        </div>
+                        <button is="timeout-button" timeout="1000"
+                            class="forage-button p-2 bg-main2 hover:brightness-120 rounded-lg">
+                            <p class="">Forage</p>
+                        </button>
+                    </div>
+                </template>
+                <template class="government">
+                    <div class="flex flex-col items-start justify-start gap-4">
+                        <div class="flex">
+                            <p class="italic text-main0">Government</p>
+                        </div>
+
+                        <hr class="border-main0 w-full">
+                        <p class="population">Population: 0</p>
+                        <hr class="population-progress border-emerald-600 w-0 rounded-full">
+                        <div class="basic_military_unlocked flex gap-4">
+                            <p class="soldiers">Soldiers: 0</p>
+                            <button class="add-soldier button">+</button>
+                            <button class="remove-soldier button">-</button>
+                        </div>
+
+                        <div class="agriculture_unlocked flex gap-4">
+                            <p class="farmers">Farmers: 0</p>
+                            <button class="add-farmer button">
+                                <span class="hover:scale-150">+</span>
+                            </button>
+                            <button class="remove-farmer button">-</button>
+                        </div>
+
+                        <div class="forager-event flex gap-4" style="display: none;">
+                            <p class="foragers">Foragers: 0</p>
+                            <button class="add-forager button">
+                                <span class="hover:scale-150">+</span>
+                            </button>
+                            <button class="remove-forager button">-</button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
+
+            <div class="w-full ml-auto h-full max-w-xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
+                <div class="flex">
+                    <p class="p-2">Storage</p>
                 </div>
+                <hr class="mt-2">
+                <div class="flex flex-col gap-4 justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
+                    <div class="p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">
+                        <span class="food">Food: 0</span>
+                        <hr class="food-depletion-progress border-orange-700 w-0 rounded-full">
+                    </div>
 
-                <button is="timeout-button" timeout="1000" class="gather-food p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">
-                    <p class="">Gather Food</p>
-                </button>
-                <button is="timeout-button" timeout="5000" class="make-person p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">
-                    <p class="">Make Person</p>
-                </button>
-            </template>
+                    <span class="ore metal_working_unlocked p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Ore: 0</span>
 
+                    <span class="wood p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Wood: 0</span>
 
+                    <span class="stone p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Stone: 0</span>
 
-            <template id="conquest">
-                <h1 class="font-bold">Settings</h1>
-                <p>Configure your preferences for Epoch.
-            </template>
-
-
-
-            <template id="settings">
-                <h1 class="font-bold">Settings</h1>
-                <p>Configure your preferences for Epoch.
-            </template>
-        </div>
-
-
-        <div class="w-full ml-auto h-full flex-col p-5 justify-start rounded-2xl items-start gap-4">
-            <ul class="sub-tab-bar flex gap-4">
-            </ul>
-            <hr class="mt-2">
-            <div class="sub-display pt-5 gap-4 flex flex-col h-full w-full">
+                    <span class="research-points p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Research: 0</span>
+                    <button class="give-research p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">Give
+                        Research</button>
+                </div>
             </div>
-            <template id="farms">
-                <h1 class="font-bold">Settings</h1>
-                <p>Configure your preferences for Epoch.
-            </template>
-            <template id="research">
-                <canvas class="canvas">
-                </canvas>
-            </template>
-        </div>
 
+            <div class="w-0 border-l-2 h-full border-hr"></div>
 
-        <div class="w-full ml-auto h-full max-w-xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
-            <div class="flex">
-                <p class="p-2">Storage</p>
-            </div>
-            <hr class="mt-2">
-            <div class="storage-display flex-col justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
-                <p class="food">Food: 0</p>
-                <div class="max-w-full">
-                    <hr class="food-depletion-progress border-orange-700 w-0 rounded-full">
+            <div class=" w-full h-full max-w-3xs flex-col p-5 justify-start items-start gap-4">
+                <div class="flex">
+                    <p class="p-2">Events</p>
+                    <button class="clear-button ml-auto">Clear</button>
                 </div>
-            </div>
-        </div>
+                <hr class="mt-2">
+                <div class="dialogue-box flex-col justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
 
-        
-        <div class="w-full h-full max-w-3xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
-            <div class="flex">
-                <p class="p-2">Events</p>
-                <button class="clear-button ml-auto">Clear</button>
+                </div>
             </div>
-            <hr class="mt-2">
-            <div class="dialogue-box flex-col justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
-
-            </div>
-        </div>
 
-    </div>
+        </div>
+        <div class="bg-main2ishish border-t-2 border-hr text-xs">
+            Music by <a href="https://composerlarkin.com/" class="text-orange-400">Christopher Larkin</a> from <a href="https://www.hollowknight.com/" class="text-orange-400">Hollow Knight</a>
+        </div>
+    </div>
+
 </body>
 </html>
