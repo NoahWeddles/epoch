@@ -16,3 +16,6 @@ Epoch is a text-based web game centered around expanding a prosperous civilizati
 - A better way to get research points
 - UI Improvements
   - More tooltips, cleaner UI
+
+## AI USE
+- I didn't use React so I ran into a wall with state management and stuff so I used Claude Code to write most of the player_data.ts script to simplify this aspect for myself.
