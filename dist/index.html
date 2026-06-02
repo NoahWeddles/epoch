@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Epoch</title>
-  <script type="module" crossorigin src="/assets/index-PtsfHkDq.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/index-Dp96FRTa.css">
+  <script type="module" crossorigin src="/epoch/assets/index-CntaCfg7.js"></script>
+  <link rel="stylesheet" crossorigin href="/epoch/assets/index-Bdj5Sy-f.css">
 </head>
 <body class="overflow-hidden">
     <div class="flex flex-col w-full h-screen">
@@ -62,12 +62,28 @@
                 </div>
                 <template class="farms">
                     <div class="flex flex-col items-start justify-start gap-4">
-                        <button is="timeout-button" timeout="1000" class="gather-food p-2 bg-main2 hover:brightness-120 rounded-lg">
-                            <p class="">Gather Food</p>
-                        </button>
-                        <button class="agriculture_unlocked p-2 bg-main2 hover:brightness-120 rounded-lg">
-                            <p class="make-farm">Make Farm</p>
-                        </button>
+                        <div class="relative inline-block group">
+                            <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
+                                <p class="gather-food">Gather Food</p>
+                            </button>
+                            <div class="absolute top-full z-10 left-1/2 mt-2
+                                                              invisible opacity-0 group-hover:visible group-hover:opacity-100
+                                                              transition-opacity duration-200
+                                                              p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
+                                gather 10 food
+                            </div>
+                        </div>
+                        <div class="agriculture_unlocked relative inline-block group">
+                            <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
+                                <p class="make-farm">Make Farm</p>
+                            </button>
+                            <div class="absolute top-full z-10 left-1/2 mt-2
+                                      invisible opacity-0 group-hover:visible group-hover:opacity-100
+                                      transition-opacity duration-200
+                                      p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
+                                costs 10 wood and stone.
+                            </div>
+                        </div>
                         <div class="agriculture_unlocked flex gap-4">
                             <p class="farmers">Farmers: 0</p>
                         </div>
@@ -96,7 +112,7 @@
                 </template>
                 <template class="forage">
                     <div class="flex flex-col items-start justify-start gap-4">
-                        <div class="forager-event contents" style="display: none;">
+                        <div class="contents">
                             <p class="foragers">Foragers: 0</p>
                             <hr class="forage-progress border-emerald-600 w-0 rounded-full">
                         </div>
@@ -115,6 +131,20 @@
                         <hr class="border-main0 w-full">
                         <p class="population">Population: 0</p>
                         <hr class="population-progress border-emerald-600 w-0 rounded-full">
+                        <div class="flex flex-col items-start justify-start gap-4">
+                            <div class="relative inline-block group">
+                                <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
+                                    <p class="make-home">Make Home</p>
+                                </button>
+                                <div
+                                    class="absolute top-full z-10 left-1/2 mt-2
+                                                                                        invisible opacity-0 group-hover:visible group-hover:opacity-100
+                                                                                        transition-opacity duration-200
+                                                                                        p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
+                                    costs 150 wood and 100 stone. Increases population cap by 5.
+                                </div>
+                            </div>
+                        <p class="homes">Homes: 0</p>
                         <div class="basic_military_unlocked flex gap-4">
                             <p class="soldiers">Soldiers: 0</p>
                             <button class="add-soldier button">+</button>
@@ -129,7 +159,7 @@
                             <button class="remove-farmer button">-</button>
                         </div>
 
-                        <div class="forager-event flex gap-4" style="display: none;">
+                        <div class="flex gap-4">
                             <p class="foragers">Foragers: 0</p>
                             <button class="add-forager button">
                                 <span class="hover:scale-150">+</span>
@@ -137,6 +167,8 @@
                             <button class="remove-forager button">-</button>
                         </div>
                     </div>
+                    </div>
+                </div>
                 </template>
             </div>
 

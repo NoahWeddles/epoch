@@ -30,7 +30,7 @@ function main(): void {
     Object.keys(pages).forEach((key) => {
         const tab = document.createElement("li");
         tab.classList.add("tab");
-        tab.classList.add(`${key.toLowerCase()}-tab`)
+
         tabs.push(tab)
         tab.addEventListener("click", () => {
             tab.classList.add("active-tab")
@@ -47,7 +47,6 @@ function main(): void {
 }
 
 function switch_tab(pageName: string): void {
-
     doActions()
 
     if (active_cleanup) {

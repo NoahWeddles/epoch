@@ -1,8 +1,11 @@
 import { playerData, type PlayerData } from "./player_data";
+//Home
 import * as farms from "./sub_tabs/farms";
 import * as government from "./sub_tabs/government";
 import * as research from "./sub_tabs/research";
-import * as forage from "./sub_tabs/forage";
+import * as forage from "./sub_tabs/forage"; 
+//Conquest
+import * as plan from "./sub_tabs/conquest/plan"
 
 interface PageModule {
     init?: () => (() => void) | void;
@@ -21,7 +24,7 @@ const pages: Record<string, Record<string, SubPage>> = {
         Forage: { templateId: "forage", module: forage}
     },
     Conquest: {
-        Map: { templateId: "map", module: null },
+        Plan: { templateId: "plan", module: plan },
     },
 };
 

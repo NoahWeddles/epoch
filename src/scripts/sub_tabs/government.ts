@@ -1,5 +1,5 @@
 import { unlocked_events } from "../events";
-import { playerData, PLAYER_FIELDS } from "../player_data";
+import { playerData, PLAYER_FIELDS, subscribe } from "../player_data";
 
 let OCCUPATION_KEYS = (Object.keys(PLAYER_FIELDS) as (keyof typeof PLAYER_FIELDS)[])
     .filter(k => (PLAYER_FIELDS[k] as { type?: string }).type === "occupation");
@@ -18,12 +18,19 @@ const rate = 1;
 let timer = 0;
 let set_progress_bar: ((timer: number) => void) | null = null;
 
+const PEOPLE_PER_HOME = 5
+
+const home_cost = {
+    wood: 150,
+    stone: 100,
+}
+
 setInterval(() => {
     timer += 0.00001 * playerData.population * rate;
     if (set_progress_bar !== null) {
         set_progress_bar(timer)
     }
-    if (timer >= 1) {
+    if (timer >= 1 && playerData.population < playerData.homes * PEOPLE_PER_HOME) {
         timer = 0;
         change_population(1)
     }
@@ -47,10 +54,28 @@ export function init(): void {
 
     document.querySelector<HTMLElement>(".make-person")!
         .addEventListener("timeout-click", () => {
-            //this still invokes the cooldown
             if (playerData.food < 50) return;
             change_population(1)
             playerData.food -= 50;
+        });
+
+    document.querySelector<HTMLElement>(".make-home")!
+        .addEventListener("click", () => {
+            let can_make = true
+            Object.keys(home_cost).forEach((item)=>{
+                const key = item as keyof typeof home_cost;
+                if(playerData[key] < home_cost[key])
+                {
+                    can_make = false
+                }
+            })
+            if (can_make) {
+                playerData.homes += 1
+                Object.keys(home_cost).forEach((item) => {
+                    const key = item as keyof typeof home_cost;
+                    playerData[key] -= home_cost[key]
+                })        
+            }
         });
 
     document.querySelector<HTMLElement>(".add-farmer")!

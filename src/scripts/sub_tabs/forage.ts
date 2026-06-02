@@ -17,11 +17,11 @@ const forageables: Record<string, Forageable> = {
     },
     "wood": {
         chance: 1,
-        min: 10,
-        max: 20
+        min: 5,
+        max: 10
     },
     "stone": {
-        chance: 0.1,
+        chance: 1,
         min: 5,
         max: 10,
     }

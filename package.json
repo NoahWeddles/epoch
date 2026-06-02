@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "deploy": "npm run build && cd dist && git add -A && git commit -m 'build' && git push origin dist && cd ..",
     "preview": "vite preview",
     "typecheck": "tsc --noEmit"
   },

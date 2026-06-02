@@ -11,6 +11,15 @@ export const PLAYER_FIELDS = {
         id: "population",
         format: (x: number) => `Population: ${x}`,
     },
+
+    homes: {
+        default: 5,
+        id: "home",
+        format: (x: number) => `Homes: ${x}`,
+    },
+
+    // ---------------------------------------------
+
     farmers: {
         type: "occupation",
         default: 0,
@@ -72,6 +81,25 @@ export const PLAYER_FIELDS = {
 } satisfies Record<string, PlayerFieldConfig>;
 
 export type PlayerData = { [K in keyof typeof PLAYER_FIELDS]: number };
+
+type Listener<K extends keyof PlayerData> = (value: PlayerData[K]) => void;
+const listeners = new Map<keyof PlayerData, Set<Listener<any>>>();
+
+export function subscribe<K extends keyof PlayerData>(
+    key: K,
+    listener: Listener<K>
+): () => void {
+    if (!listeners.has(key)) listeners.set(key, new Set());
+    listeners.get(key)!.add(listener);
+    return () => listeners.get(key)?.delete(listener);
+}
+
+export function bind<K extends keyof PlayerData>(el: HTMLElement, key: K): () => void {
+    const { format } = PLAYER_FIELDS[key];
+    el.textContent = format(playerData[key]);
+    return subscribe(key, (value) => { el.textContent = format(value as number); });
+}
+
 
 function createPlayerData(fields: typeof PLAYER_FIELDS): PlayerData {
     const state = Object.fromEntries(

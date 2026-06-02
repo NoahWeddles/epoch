@@ -25,7 +25,7 @@ export function init() {
         document.querySelectorAll<HTMLElement>(".farmer-event").forEach((el) => el.style.display = "");
     }
     document.querySelector<HTMLElement>(".gather-food")!
-        .addEventListener("timeout-click", () => {
+        .addEventListener("click", () => {
             playerData.food += 10;
     });
     document.querySelector<HTMLElement>(".make-farm")!

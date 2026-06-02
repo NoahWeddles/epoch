@@ -189,7 +189,7 @@ function drawTechnologies(world: HTMLElement): void {
         const frag = template.content.cloneNode(true) as DocumentFragment;
         const card = frag.firstElementChild as HTMLElement;
 
-        card.dataset.techId = tech.id;          // <-- tag each card
+        card.dataset.techId = tech.id;
         card.style.left = `${tech.x!}px`;
         card.style.top = `${tech.y!}px`;
 
@@ -197,7 +197,7 @@ function drawTechnologies(world: HTMLElement): void {
         card.querySelector(".cost")!.textContent = String(tech.researchCost);
         card.querySelector(".description")!.textContent = tech.description
 
-        card.addEventListener("click", () => unlockTechnology(tech)) // <-- add the action for unlocking
+        card.addEventListener("click", () => unlockTechnology(tech))
 
         world.appendChild(frag);
     }
