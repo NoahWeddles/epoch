@@ -21,7 +21,7 @@ function update(animateFirst = false): void {
     for (let i = 0; i < events.length; i++) {
         const event = events[i];
         const p = document.createElement("p");
-        p.style.opacity = String(1 - (i * 0.1));
+        p.style.opacity = String(1 - (i * 0.01));
         p.style.transition = "transform 0.3s ease, opacity 0.3s ease";
         p.textContent = event;
 
