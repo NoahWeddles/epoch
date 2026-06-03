@@ -20,7 +20,7 @@
         <div class="sub-tab-bar pl-8 flex items-center list-none justify-start w-full h-9 bg-main2ishish">
         </div>
         <hr class="text-hr">
-        <div class="bg-radial-[at_50%_150%] from-main2 to-main3 h-full flex items-center justify-between p-x-10 overflow-hidden">
+        <div class="bg-radial-[at_50%_50%] from-main2 to-main3 h-full flex items-center justify-between p-x-10 overflow-hidden">
             <div class="flex flex-col w-full h-full justify-start max-w-md rounded-2xl p-5">
                 <script type="module" src="./src/scripts/tab.ts"></script>
 
@@ -152,7 +152,9 @@
                         <hr class="border-main0 w-full">
 
                         <p class="population">Population: 0</p>
-                        <hr class="population-progress border-emerald-600 w-0 rounded-full">
+                        <div class="border-2 border-hr w-full h-2.3">
+                            <hr class="population-progress border-3 border-emerald-600 w-0">
+                        </div>
                         <div class="flex flex-col items-start justify-start gap-4 w-full">
                             <div class="relative inline-block group w-full">
                                 <button class="p-2 bg-main2 hover:brightness-120 w-1/2 rounded-lg">
@@ -245,26 +247,28 @@
         </div>
 
 
-        <div class="w-full ml-auto h-full max-w-xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
+        <div class="w-full h-full max-w-xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
             <div class="flex">
                 <p class="p-2">Storage</p>
             </div>
             <hr class="mt-2">
-            <div class="flex flex-col gap-4 justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
-                <div class="p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">
+            <div class="flex flex-col gap-4 justify-start items-start max-w-3xs w-full pt-5 pr-0 h-full overflow-hidden">
+                <div class="p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:10%] w-full">
                     <span class="food">Food: 0</span>
-                    <hr class="food-depletion-progress border-orange-700 w-0 rounded-full">
+                    <div class="border-2 border-hr w-full h-2.3">
+                        <hr class="food-depletion-progress border-3 border-orange-700 w-0">
+                    </div>
                 </div>
 
                 <span
-                    class="ore metal_working_unlocked p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Ore:
+                    class="ore metal_working_unlocked p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:10%] w-full">Ore:
                     0</span>
 
-                <span class="wood p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Wood: 0</span>
+                <span class="wood p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:10%] w-full">Wood: 0</span>
 
-                <span class="stone p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Stone: 0</span>
+                <span class="stone p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:10%] w-full">Stone: 0</span>
 
-                <span class="research-points p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Research:
+                <span class="research-points p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:10%] w-full">Research:
                     0</span>
                 <button class="give-research p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">Give
                     Research</button>
