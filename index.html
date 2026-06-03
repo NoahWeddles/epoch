@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Epoch</title>
 </head>
+
 <body class="overflow-hidden">
     <div class="flex flex-col w-full h-screen">
         <div class="header p-6 pl-3 flex items-center justify-start w-full h-10 bg-main3">
@@ -65,7 +67,8 @@
                             <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
                                 <p class="gather-food">Gather Food</p>
                             </button>
-                            <div class="absolute top-full z-10 left-1/2 mt-2
+                            <div
+                                class="absolute top-full z-10 left-1/2 mt-2
                                                               invisible opacity-0 group-hover:visible group-hover:opacity-100
                                                               transition-opacity duration-200
                                                               p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
@@ -143,93 +146,135 @@
                                     costs 150 wood and 100 stone. Increases population cap by 5.
                                 </div>
                             </div>
-                        <p class="homes">Homes: 0</p>
-                        <div class="basic_military_unlocked flex gap-4">
-                            <p class="soldiers">Soldiers: 0</p>
-                            <button class="add-soldier button">+</button>
-                            <button class="remove-soldier button">-</button>
-                        </div>
-
-                        <div class="agriculture_unlocked flex gap-4">
-                            <p class="farmers">Farmers: 0</p>
-                            <button class="add-farmer button">
-                                <span class="hover:scale-150">+</span>
-                            </button>
-                            <button class="remove-farmer button">-</button>
-                        </div>
-
-                        <div class="flex gap-4">
-                            <p class="foragers">Foragers: 0</p>
-                            <button class="add-forager button">
-                                <span class="hover:scale-150">+</span>
-                            </button>
-                            <button class="remove-forager button">-</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </template>
-                <template class="plan">
-                    <div class="flex flex-col items-start justify-start gap-4">
-                        <div class="neighboring_civilizations flex flex-col items-start justify-start gap-4">
-
-                        </div>
-                        <template class="civilization">
-                            <div class=" hover:brightness-110 active:brightness-80 flex h-15  p-2 gap-2 border-2 border-main1">
-                                <p class="name"></p>
-                                <p class="population"></p>
+                            <p class="homes">Homes: 0</p>
+                            <div class="basic_military_unlocked flex gap-4">
+                                <p class="soldiers">Soldiers: 0</p>
+                                <button class="add-soldier button">+</button>
+                                <button class="remove-soldier button">-</button>
                             </div>
-                        </template>
+
+                            <div class="agriculture_unlocked flex gap-4">
+                                <p class="farmers">Farmers: 0</p>
+                                <button class="add-farmer button">
+                                    <span class="hover:scale-150">+</span>
+                                </button>
+                                <button class="remove-farmer button">-</button>
+                            </div>
+
+                            <div class="flex gap-4">
+                                <p class="foragers">Foragers: 0</p>
+                                <button class="add-forager button">
+                                    <span class="hover:scale-150">+</span>
+                                </button>
+                                <button class="remove-forager button">-</button>
+                            </div>
+                        </div>
                     </div>
-                </template>
             </div>
+            </template>
+            <template class="plan">
+                <div class="flex flex-col items-start justify-start gap-4">
+                    <div class="neighboring_civilizations flex flex-col items-start justify-start gap-8">
 
-
-            <div class="w-full ml-auto h-full max-w-xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
-                <div class="flex">
-                    <p class="p-2">Storage</p>
-                </div>
-                <hr class="mt-2">
-                <div class="flex flex-col gap-4 justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
-                    <div class="p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">
-                        <span class="food">Food: 0</span>
-                        <hr class="food-depletion-progress border-orange-700 w-0 rounded-full">
                     </div>
+                    <template class="civilization">
+                        <div
+                            class=" hover:brightness-110 active:brightness-80 flex flex-col p-2 gap-2 border-2 border-main1">
+                            <div class="flex gap-4">
+                                <p class="civ-name"></p>
+                                <p class="civ-population"></p>
+                            </div>
 
-                    <span class="ore metal_working_unlocked p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Ore: 0</span>
 
-                    <span class="wood p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Wood: 0</span>
 
-                    <span class="stone p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Stone: 0</span>
 
-                    <span class="research-points p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Research: 0</span>
-                    <button class="give-research p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">Give
-                        Research</button>
+                            <!-- military strength display -->
+                            <div class="flex flex-col items-start justify-start gap-4">
+                                <div class="relative inline-block group">
+                                    <div class="p-2 bg-main2 rounded-lg">
+                                        <p class="civ-military-strength"></p>
+                                    </div>
+                                    <div class="absolute top-full z-50 left-1/2 mt-2
+                                                    invisible opacity-0 group-hover:visible group-hover:opacity-100
+                                                    transition-opacity duration-200
+                                                    p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
+                                        Military power of this civilization
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- civilization type display -->
+                            <div class="flex flex-col items-start justify-start gap-4">
+                                <div class="relative inline-block group">
+                                    <div class="p-2 bg-main2 rounded-lg">
+                                        <p class="civ-type"></p>
+                                    </div>
+                                    <div
+                                        class="absolute top-full z-50 left-1/2 mt-2
+                                                                                                                                                        invisible opacity-0 group-hover:visible group-hover:opacity-100
+                                                                                                                                                        transition-opacity duration-200
+                                                                                                                                                        p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
+                                        Civilization type
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
                 </div>
-                <script type="module" src="./src/scripts/storage.ts"></script>
-            </div>
-
-            <div class="w-0 border-l-2 h-full border-hr"></div>
-
-            <div class=" w-full h-full max-w-3xs flex-col p-5 justify-start items-start gap-4">
-                <div class="flex">
-                    <p class="p-2">Events</p>
-                    <button class="clear-button ml-auto">Clear</button>
-                </div>
-                <hr class="mt-2">
-                <div class="dialogue-box flex-col justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
-
-                </div>
-            </div>
-
-            <script type="module" src="./src/scripts/event_dialogue.ts"></script>
+            </template>
         </div>
-        <div class="bg-main2ishish border-t-2 border-hr text-xs">
-            Music by <a href="https://composerlarkin.com/" class="text-orange-400">Christopher Larkin</a> from <a href="https://www.hollowknight.com/" class="text-orange-400">Hollow Knight</a>
+
+
+        <div class="w-full ml-auto h-full max-w-xs flex-col p-5 justify-start rounded-2xl items-start gap-4">
+            <div class="flex">
+                <p class="p-2">Storage</p>
+            </div>
+            <hr class="mt-2">
+            <div class="flex flex-col gap-4 justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
+                <div class="p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">
+                    <span class="food">Food: 0</span>
+                    <hr class="food-depletion-progress border-orange-700 w-0 rounded-full">
+                </div>
+
+                <span
+                    class="ore metal_working_unlocked p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Ore:
+                    0</span>
+
+                <span class="wood p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Wood: 0</span>
+
+                <span class="stone p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Stone: 0</span>
+
+                <span class="research-points p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:5%] w-full">Research:
+                    0</span>
+                <button class="give-research p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">Give
+                    Research</button>
+            </div>
+            <script type="module" src="./src/scripts/storage.ts"></script>
         </div>
+
+        <div class="w-0 border-l-2 h-full border-hr"></div>
+
+        <div class=" w-full h-full max-w-3xs flex-col p-5 justify-start items-start gap-4">
+            <div class="flex">
+                <p class="p-2">Events</p>
+                <button class="clear-button ml-auto">Clear</button>
+            </div>
+            <hr class="mt-2">
+            <div class="dialogue-box flex-col justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">
+
+            </div>
+        </div>
+
+        <script type="module" src="./src/scripts/event_dialogue.ts"></script>
+    </div>
+    <div class="bg-main2ishish border-t-2 border-hr text-xs">
+        Music by <a href="https://composerlarkin.com/" class="text-orange-400">Christopher Larkin</a> from <a
+            href="https://www.hollowknight.com/" class="text-orange-400">Hollow Knight</a>
+    </div>
     </div>
 
     <script type="module" src="./src/scripts/main.ts"></script>
     <script type="module" src="./src/scripts/events.ts"></script>
 </body>
+
 </html>

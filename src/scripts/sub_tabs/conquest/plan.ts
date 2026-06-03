@@ -12,8 +12,10 @@ function drawCivilizations(): void {
         const frag = template.content.cloneNode(true) as DocumentFragment;
         const card = frag.firstElementChild as HTMLElement;
 
-        card.querySelector(".name")!.textContent = civ.name;
-        card.querySelector(".population")!.textContent = civ.population.toString();
+        card.querySelector(".civ-name")!.textContent = civ.name;
+        card.querySelector(".civ-population")!.textContent = civ.population.toString();
+        card.querySelector(".civ-military-strength")!.textContent = civ.military_strength.toString();
+        card.querySelector(".civ-type")!.textContent = civ.type.toString()
 
         container.appendChild(frag);
     }
