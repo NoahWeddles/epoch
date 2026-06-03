@@ -26,7 +26,7 @@
 
 
 
-                <div class="display pt-5 gap-4 flex flex-col h-full w-full rounded-b-2xl">
+                <div class="display  gap-4 flex flex-col h-full w-full rounded-b-2xl">
 
                 </div>
 
@@ -59,10 +59,17 @@
 
 
             <div class="w-full ml-auto h-full flex-col justify-start rounded-2xl items-start">
-                <div class="sub-display p-5 gap-4 flex flex-col h-full w-full overflow-hidden">
+                <div class="sub-display border-x-2 border-hr p-5 gap-4 flex flex-col h-full w-full bg-transparent overflow-hidden">
                 </div>
                 <template class="farms">
-                    <div class="flex flex-col items-start justify-start gap-4">
+                    <div class="flex flex-col items-start justify-start gap-4 p-2">
+                        
+                        <div class="flex">
+                            <p class="italic text-main0">Farms</p>
+                        </div>
+
+                        <hr class="border-main0 w-full">
+
                         <div class="relative inline-block group">
                             <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
                                 <p class="gather-food">Gather Food</p>
@@ -76,9 +83,13 @@
                             </div>
                         </div>
                         <div class="agriculture_unlocked relative inline-block group">
+
                             <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
                                 <p class="make-farm">Make Farm</p>
                             </button>
+
+                            <hr class="border-main0 w-full">
+
                             <div class="absolute top-full z-10 left-1/2 mt-2
                                       invisible opacity-0 group-hover:visible group-hover:opacity-100
                                       transition-opacity duration-200
@@ -113,7 +124,14 @@
                     </div>
                 </template>
                 <template class="forage">
-                    <div class="flex flex-col items-start justify-start gap-4">
+                    <div class="flex flex-col items-start justify-start p-2 gap-4">
+
+                        <div class="flex">
+                            <p class="italic text-main0">Foraging</p>
+                        </div>
+                        
+                        <hr class="border-main0 w-full">
+
                         <div class="contents">
                             <p class="foragers">Foragers: 0</p>
                             <hr class="forage-progress border-emerald-600 w-0 rounded-full">
@@ -125,17 +143,19 @@
                     </div>
                 </template>
                 <template class="government">
-                    <div class="flex flex-col items-start justify-start gap-4">
+                    <div class="flex flex-col items-start justify-start p-2 gap-4">
+
                         <div class="flex">
                             <p class="italic text-main0">Government</p>
                         </div>
 
                         <hr class="border-main0 w-full">
+
                         <p class="population">Population: 0</p>
                         <hr class="population-progress border-emerald-600 w-0 rounded-full">
-                        <div class="flex flex-col items-start justify-start gap-4">
-                            <div class="relative inline-block group">
-                                <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
+                        <div class="flex flex-col items-start justify-start gap-4 w-full">
+                            <div class="relative inline-block group w-full">
+                                <button class="p-2 bg-main2 hover:brightness-120 w-1/2 rounded-lg">
                                     <p class="make-home">Make Home</p>
                                 </button>
                                 <div
@@ -173,16 +193,16 @@
             </div>
             </template>
             <template class="plan">
-                <div class="flex flex-col items-start justify-start gap-4">
-                    <div class="neighboring_civilizations flex flex-col items-start justify-start gap-8">
+                <div class="flex flex-col items-start justify-start gap-4 h-full overflow-y-auto scrollbar-none">
+                    <div class="neighboring_civilizations flex flex-col items-start w-full justify-start gap-8">
 
                     </div>
                     <template class="civilization">
                         <div
-                            class=" hover:brightness-110 active:brightness-80 flex flex-col p-2 gap-2 border-2 border-main1">
-                            <div class="flex gap-4">
+                            class=" hover:brightness-110 active:brightness-80 flex flex-col p-5 gap-2 border-2 w-full border-main1 scroll-auto">
+                            <div class="flex">
                                 <p class="civ-name"></p>
-                                <p class="civ-population"></p>
+                                <p class="civ-population ml-auto"></p>
                             </div>
 
 
@@ -254,10 +274,10 @@
 
         <div class="w-0 border-l-2 h-full border-hr"></div>
 
-        <div class=" w-full h-full max-w-3xs flex flex-col p-5 justify-start items-start gap-4 overflow-hidden">
-            <div class="flex justify-between">
+        <div class=" w-full h-full max-w-3xs flex flex-col p-5 justify-start items-start overflow-hidden">
+            <div class="flex justify-between w-full">
                 <p class="p-2">Events</p>
-                <button class="clear-button">Clear</button>
+                <button class="clear-button p-2 min-w-0 bg-main2 rounded-lg hover:brightness-120">Clear</button>
             </div>
             <hr class="mt-2 w-full">
             <div class="dialogue-box flex-col justify-start items-start max-w-3xs w-full pt-5 h-full overflow-hidden">

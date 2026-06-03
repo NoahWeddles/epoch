@@ -1,4 +1,5 @@
 import { add_event } from "../event_dialogue";
+import { drawCivilizations } from "../sub_tabs/conquest/plan";
 
 interface Civilization {
     name: string;
@@ -198,7 +199,7 @@ interface CivEvent{
 const civEvents: CivEvent[] = [
     {
         id: "war",
-        chance: 1,
+        chance: 0.1,
         action: (civ1, civ2)=>{
             add_event(`${civ1.name} warred with ${civ2.name}`)
 
@@ -208,9 +209,15 @@ const civEvents: CivEvent[] = [
             const dominant_losses = Math.floor(dominant_civ.population*0.1)
             const subordinate_losses = Math.floor(subordinate_civ.population*0.5)
 
-            // setTimeout(() => {
-            //     add_event(`${dominant_civ.name} lost ${dominant_losses}, ${subordinate_civ.name} lost ${subordinate_losses}`)
-            // }, 500)
+            dominant_civ.population -= dominant_losses
+            subordinate_civ.population -= subordinate_losses
+
+
+
+            setTimeout(() => {
+                add_event(`${dominant_civ.name} lost ${dominant_losses}, ${subordinate_civ.name} lost ${subordinate_losses}`)
+                drawCivilizations()
+            }, 500)
         }
     }
 ]
@@ -225,7 +232,7 @@ setInterval(() => {
             e.action(civ1,civ2)
         }
     })
-}, 100);
+}, 1000);
 
 export function init(): void {
 }
