@@ -26,7 +26,7 @@
 
 
 
-                <div class="display  gap-4 flex flex-col h-full w-full rounded-b-2xl">
+                <div class="display p-4 gap-4 flex flex-col h-full w-full rounded-b-2xl">
 
                 </div>
 
@@ -34,11 +34,13 @@
 
 
                 <template class="home">
-                    <button is="timeout-button" timeout="1"
-                        class="make-person p-2 min-w-0 bg-main2 hover:brightness-120 rounded-lg">
-                        <p class="">Make Person</p>
-                    </button>
-
+                    <div class="flex gap-5 p-2 items-center justify-start rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:25%] w-full">
+                        <span class="italic">Name</span><textarea class="civilization-name-set focus:border-transparent focus:outline-none resize-none w-full h-5"></textarea>
+                        <span class="random_civ_name_button hover:brightness-110 active:brightness-120"><svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#d9c06d">
+                            <path
+                                d="M354.5-269.5Q372-287 372-312t-17.5-42.5Q337-372 312-372t-42.5 17.5Q252-337 252-312t17.5 42.5Q287-252 312-252t42.5-17.5Zm0-336Q372-623 372-648t-17.5-42.5Q337-708 312-708t-42.5 17.5Q252-673 252-648t17.5 42.5Q287-588 312-588t42.5-17.5Zm168 168Q540-455 540-480t-17.5-42.5Q505-540 480-540t-42.5 17.5Q420-505 420-480t17.5 42.5Q455-420 480-420t42.5-17.5Zm168 168Q708-287 708-312t-17.5-42.5Q673-372 648-372t-42.5 17.5Q588-337 588-312t17.5 42.5Q623-252 648-252t42.5-17.5Zm0-336Q708-623 708-648t-17.5-42.5Q673-708 648-708t-42.5 17.5Q588-673 588-648t17.5 42.5Q623-588 648-588t42.5-17.5ZM216-144q-29.7 0-50.85-21.15Q144-186.3 144-216v-528q0-29.7 21.15-50.85Q186.3-816 216-816h528q29.7 0 50.85 21.15Q816-773.7 816-744v528q0 29.7-21.15 50.85Q773.7-144 744-144H216Zm0-72h528v-528H216v528Zm0-528v528-528Z" />
+                        </svg></span>
+                    </div>
                 </template>
 
 
@@ -62,48 +64,52 @@
                 <div class="sub-display border-x-2 border-hr p-5 gap-4 flex flex-col h-full w-full bg-transparent overflow-hidden">
                 </div>
                 <template class="farms">
-                    <div class="flex flex-col items-start justify-start gap-4 p-2">
+                    <div class="flex flex-col items-start justify-start gap-4 p-2 h-full">
                         
-                        <div class="flex">
+                        <div class="flex w-full">
                             <p class="italic text-main0">Farms</p>
                         </div>
 
                         <hr class="border-main0 w-full">
+                        <div class="flex w-full">
+                            <div class="w-full h-full flex flex-col gap-5">
+                                <div class="relative inline-block group">
+                                    <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
+                                        <p class="gather-food">Gather Food</p>
+                                    </button>
+                                    <div
+                                        class="absolute top-full z-10 left-1/2 mt-2
+                                                                                              invisible opacity-0 group-hover:visible group-hover:opacity-100
+                                                                                              transition-opacity duration-200
+                                                                                              p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
+                                        gather 10 food
+                                    </div>
+                                </div>
+                                <div class="agriculture_unlocked relative inline-block group">
+                                    <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
+                                        <p class="make-farm">Make Farm</p>
+                                    </button>
+                                
+                                    <div class="absolute top-full z-10 left-1/2 mt-2
+                                                                      invisible opacity-0 group-hover:visible group-hover:opacity-100
+                                                                      transition-opacity duration-200
+                                                                      p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
+                                        costs 10 wood and stone.
+                                    </div>
+                                </div>
 
-                        <div class="relative inline-block group">
-                            <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
-                                <p class="gather-food">Gather Food</p>
-                            </button>
-                            <div
-                                class="absolute top-full z-10 left-1/2 mt-2
-                                                              invisible opacity-0 group-hover:visible group-hover:opacity-100
-                                                              transition-opacity duration-200
-                                                              p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
-                                gather 10 food
+
+                                <hr class="harvest-progress agriculture_unlocked border-emerald-600 w-0 rounded-full">
+                            </div>
+                            <div class="w-full h-full flex flex-col gap-4">
+                                <div class="agriculture_unlocked flex gap-4 p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:10%] w-1/3">
+                                    <p class="farmers">Farmers: 0</p>
+                                </div>
+                                <div class="agriculture_unlocked flex gap-4 p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:10%] w-1/3">
+                                    <p class="farms">Farms: 0</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="agriculture_unlocked relative inline-block group">
-
-                            <button class="p-2 bg-main2 hover:brightness-120 rounded-lg">
-                                <p class="make-farm">Make Farm</p>
-                            </button>
-
-                            <hr class="border-main0 w-full">
-
-                            <div class="absolute top-full z-10 left-1/2 mt-2
-                                      invisible opacity-0 group-hover:visible group-hover:opacity-100
-                                      transition-opacity duration-200
-                                      p-2 text-sm max-w-150 min-w-50 min-h-0 border-2 bg-main2">
-                                costs 10 wood and stone.
-                            </div>
-                        </div>
-                        <div class="agriculture_unlocked flex gap-4">
-                            <p class="farmers">Farmers: 0</p>
-                        </div>
-                        <div class="agriculture_unlocked flex gap-4">
-                            <p class="farms">Farms: 0</p>
-                        </div>
-                        <hr class="harvest-progress agriculture_unlocked border-emerald-600 w-0 rounded-full">
                     </div>
                 </template>
 

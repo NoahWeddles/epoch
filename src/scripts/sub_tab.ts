@@ -7,6 +7,8 @@ import * as forage from "./sub_tabs/forage";
 //Conquest
 import * as plan from "./sub_tabs/conquest/plan"
 
+import click from "../click.mp3"
+
 interface PageModule {
     init?: () => (() => void) | void;
 }
@@ -60,6 +62,16 @@ export function set_bar(pageName: string): void {
         tab.textContent = key;
         tab_bar.appendChild(tab);
     });
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".sub-tab")
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            const audio = new Audio(click);
+            audio.preservesPitch = false;
+            audio.playbackRate = Math.random() * 0.4 + 0.8;
+            audio.play()
+        })
+    })
 }
 
 function switch_tab(pageName: string, tabName: string): void {

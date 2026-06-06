@@ -5,6 +5,9 @@ import * as settings from "./tabs/settings";
 import { set_bar } from "./sub_tab";
 import {doActions} from "./sub_tabs/research"
 
+import click from "../click.mp3"
+import { playAudio } from "./audio";
+
 interface PageModule {
     init?: () => (() => void) | void;
 }
@@ -44,6 +47,15 @@ function main(): void {
         tab.textContent = key;
         tab_bar.appendChild(tab);
     });
+
+    const buttons = document.querySelectorAll<HTMLButtonElement>(".tab")
+
+    buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+            playAudio("click", (Math.random() * 0.2 + 0.7))
+        })
+    })
+
 }
 
 function switch_tab(pageName: string): void {

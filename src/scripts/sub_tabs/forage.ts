@@ -3,6 +3,9 @@ import { add_event } from "../event_dialogue";
 import { unlocked_events } from "../events";
 import { unlocked_technologies } from "./research";
 
+import forage1 from "../../forage1.mp3"
+import forage2 from "../../forage2.mp3"
+
 interface Forageable{
     chance: number;
     min: number;
@@ -32,7 +35,19 @@ let forage_timer = 0;
 let set_forage_progress_bar: ((timer: number) => void) | null = null;
 
 export function init(){
-    document.querySelector<HTMLElement>(".forage-button")!.addEventListener("timeout-click", forage);
+    document.querySelector<HTMLElement>(".forage-button")!.addEventListener("timeout-click", ()=>{
+        forage(); 
+        let audio: HTMLAudioElement | null = null;
+        if (Math.random() > 0.5) {
+            audio = new Audio(forage1)
+        } else {
+            audio = new Audio(forage2)
+        }
+        audio.preservesPitch = false;
+        audio.volume = 0.5
+        audio.playbackRate = Math.random() * 0.2 + 0.7;
+        audio.play()
+        });
     const forage_progress_bar = document.querySelector<HTMLElement>(".forage-progress")!;
     set_forage_progress_bar = (timer: number) => {
         forage_progress_bar.style.width = `${timer * 100}%`;
@@ -54,9 +69,12 @@ setInterval(() => {
 }, 10);
 
 function forage() : void {
+
+
     const keys = Object.keys(forageables) as Array<keyof PlayerData>
     keys.forEach((key)=>{
         const forageable = forageables[key]
+
 
         if (String(key) == "ore" && !unlocked_technologies["metal_working"]) return;
 

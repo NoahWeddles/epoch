@@ -52,13 +52,6 @@ export function init(): void {
         progress_bar.style.width = `${timer * 100}%`;
     };
 
-    document.querySelector<HTMLElement>(".make-person")!
-        .addEventListener("timeout-click", () => {
-            if (playerData.food < 50) return;
-            change_population(1)
-            playerData.food -= 50;
-        });
-
     document.querySelector<HTMLElement>(".make-home")!
         .addEventListener("click", () => {
             let can_make = true

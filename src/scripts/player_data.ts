@@ -1,11 +1,22 @@
+import { generateCivilizationName } from "./names";
+import { CivilizationType } from "./civilization_types";
+
+
+
 interface PlayerFieldConfig {
-    default: number;
+    default: any;
     type?: string;
     id: string;
-    format: (x: number) => string;
+    format: (x: any) => string;
 }
 
 export const PLAYER_FIELDS = {
+    civilization_name:{
+        default: generateCivilizationName(CivilizationType.Agriculture),
+        id: "civilization-name",
+        format: (x: string) => x,
+    },
+
     population: {
         default: 5,
         id: "population",
@@ -14,7 +25,7 @@ export const PLAYER_FIELDS = {
 
     homes: {
         default: 5,
-        id: "home",
+        id: "homes",
         format: (x: number) => `Homes: ${x}`,
     },
 
@@ -80,7 +91,9 @@ export const PLAYER_FIELDS = {
     },
 } satisfies Record<string, PlayerFieldConfig>;
 
-export type PlayerData = { [K in keyof typeof PLAYER_FIELDS]: number };
+export type PlayerData = {
+    [K in keyof typeof PLAYER_FIELDS]: typeof PLAYER_FIELDS[K]["default"]
+};
 
 type Listener<K extends keyof PlayerData> = (value: PlayerData[K]) => void;
 const listeners = new Map<keyof PlayerData, Set<Listener<any>>>();
