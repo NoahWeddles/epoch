@@ -1,6 +1,13 @@
-import { useGameStore } from "../context/GameContext";
+import { changeValue, useGameStore } from "../context/GameContext";
+
+export function change_population(delta: number) {
+    changeValue("population", Math.ceil(delta))
+}
 
 export default function Government(){
+
+    const {soldiers, farmers, foragers, homes, population} = useGameStore(s=>s);
+
     return(
         <div className="flex flex-col items-start justify-start p-2 gap-4">
 
@@ -10,7 +17,7 @@ export default function Government(){
 
             <hr className="border-main0 w-full" />
 
-            <p className="population">Population: 0</p>
+            <p className="population">Population: {population}</p>
             <div className="border-2 border-hr w-full h-2.3">
                 <hr className="population-progress border-3 border-emerald-600 w-0" />
             </div>
@@ -27,15 +34,15 @@ export default function Government(){
                         costs 150 wood and 100 stone. Increases population cap by 5.
                     </div>
                 </div>
-                <p className="homes">Homes: 0</p>
+                <p className="homes">Homes: {homes}</p>
                 <div className="basic_military_unlocked flex gap-4">
-                    <p className="soldiers">Soldiers: 0</p>
+                    <p className="soldiers">Soldiers: {soldiers}</p>
                     <button className="add-soldier button">+</button>
                     <button className="remove-soldier button">-</button>
                 </div>
 
                 <div className="agriculture_unlocked flex gap-4">
-                    <p className="farmers">Farmers: 0</p>
+                    <p className="farmers">Farmers: {farmers}</p>
                     <button className="add-farmer button">
                         <span className="hover:scale-150">+</span>
                     </button>
@@ -43,7 +50,7 @@ export default function Government(){
                 </div>
 
                 <div className="flex gap-4">
-                    <p className="foragers">Foragers: 0</p>
+                    <p className="foragers">Foragers: {foragers}</p>
                     <button className="add-forager button">
                         <span className="hover:scale-150">+</span>
                     </button>
@@ -52,10 +59,4 @@ export default function Government(){
             </div>
         </div>
     );
-}
-
-
-function change_population(delta: number) {
-    const population = useGameStore(s => s.population);
-    useGameStore.setState({ population: population + delta});
 }

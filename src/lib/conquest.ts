@@ -1,7 +1,7 @@
 // import { add_event } from "../event_dialogue";
 // import { drawCivilizations } from "../sub_tabs/conquest/plan";
-import { generateCivilizationName } from "../names";
-import { CivilizationType } from "../civilization_types";
+import { generateCivilizationName } from "./names";
+import { CivilizationType } from "./civilization_types";
 
 interface Civilization {
     name: string;
@@ -75,7 +75,7 @@ const civEvents: CivEvent[] = [
         id: "war",
         chance: 0.01,
         action: (civ1, civ2) => {
-            add_event(`${civ1.name} warred with ${civ2.name}`)
+            // add_event(`${civ1.name} warred with ${civ2.name}`)
 
             const dominant_civ = civ1.military_strength > civ2.military_strength ? civ1 : civ2
             const subordinate_civ = dominant_civ === civ1 ? civ2 : civ1
@@ -89,8 +89,8 @@ const civEvents: CivEvent[] = [
 
 
             setTimeout(() => {
-                add_event(`${dominant_civ.name} lost ${dominant_losses}, ${subordinate_civ.name} lost ${subordinate_losses}`)
-                drawCivilizations()
+                // add_event(`${dominant_civ.name} lost ${dominant_losses}, ${subordinate_civ.name} lost ${subordinate_losses}`)
+                // drawCivilizations()
             }, 500)
         }
     },
@@ -98,7 +98,7 @@ const civEvents: CivEvent[] = [
         id: "war",
         chance: 0.01,
         action: (civ1, civ2) => {
-            add_event(`${civ1.name} warred with ${civ2.name}`)
+            // add_event(`${civ1.name} warred with ${civ2.name}`)
 
             const dominant_civ = civ1.military_strength > civ2.military_strength ? civ1 : civ2
             const subordinate_civ = dominant_civ === civ1 ? civ2 : civ1
@@ -112,8 +112,8 @@ const civEvents: CivEvent[] = [
 
 
             setTimeout(() => {
-                add_event(`${dominant_civ.name} lost ${dominant_losses}, ${subordinate_civ.name} lost ${subordinate_losses}`)
-                drawCivilizations()
+                // add_event(`${dominant_civ.name} lost ${dominant_losses}, ${subordinate_civ.name} lost ${subordinate_losses}`)
+                // drawCivilizations()
             }, 500)
         }
     }

@@ -1,7 +1,19 @@
-import { useGameStore } from "../context/GameContext"
-import { FARM_COST, FOOD_PER_GATHER, HOME_COST } from "../lib/constants"
+import { useCallback, useRef } from "react";
+import { useGameStore } from "../context/GameContext";
+import { useHarvestLoop } from "../hooks/useHarvestLoop";
+import { FARM_COST, FOOD_PER_GATHER, HOME_COST } from "../lib/constants";
 
 export default function Farms(){
+    const progressRef = useRef<HTMLHRElement>(null);
+
+    const handleTick = useCallback((progress: number)=>{
+        if (progressRef.current){
+            progressRef.current.style.width = `${progress * 100}%`
+        }
+    }, [])
+
+    useHarvestLoop(handleTick)
+
     const farmers = useGameStore(s=>s.farmers)
     const farms = useGameStore(s => s.farms)
     return (
@@ -41,7 +53,7 @@ export default function Farms(){
                         </div>
 
 
-                    <hr className="harvest-progress agriculture_unlocked border-emerald-600 w-0 rounded-full"/>
+                    <hr ref={progressRef} className="harvest-progress agriculture_unlocked border-emerald-600 w-0 rounded-full"/>
                     </div>
                     <div className="w-full h-full flex flex-col gap-4">
                         <div className="agriculture_unlocked flex gap-4 p-2 rounded-xs bg-main0/(--bg-opacity) [--bg-opacity:10%] w-1/3">
