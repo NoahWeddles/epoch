@@ -1,9 +1,8 @@
 import { useEffect, useRef } from "react";
-import { useGameStore } from "../context/GameContext";
+import { changeValue, setValue, useGameStore } from "../context/GameContext";
 
 const TICK_MS = 10;
-const FOOD_DEPLETION_RATE = 0.0001;
-const POPULATION_FACTOR = 1;
+const FOOD_DEPLETION_RATE = 0.005;
 
 export function useFoodLoop(onTick: (progress: number) => void) {
     const timer = useRef(0);
@@ -16,12 +15,13 @@ export function useFoodLoop(onTick: (progress: number) => void) {
             if (timer.current >= 1) {
                 timer.current = 0;
                 const { food, population } = useGameStore.getState();
-                const depletion = population * POPULATION_FACTOR;
+                const depletion = 1;
 
                 if (food - depletion >= 0) {
-                    useGameStore.setState({ food: food - depletion });
+                    changeValue("food", -depletion);
+                    console.log(`Depleted ${depletion} food, {food: ${food - depletion}}`);
                 } else {
-                    useGameStore.setState({ population: Math.max(0, population - 1) });
+                    setValue("population", Math.max(0, Math.max(population-1, Math.floor( population - (population * 0.1) ))));
                 }
             }
         }, TICK_MS);

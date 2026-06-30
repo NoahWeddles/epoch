@@ -1,136 +1,75 @@
-// import { add_event } from "../event_dialogue";
-// import { drawCivilizations } from "../sub_tabs/conquest/plan";
-import { generateCivilizationName } from "./names";
-import { CivilizationType } from "./civilization_types";
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import { generateCivilizationName } from './names';
+import { CivilizationType } from './civilization_types';
+import { addEvent } from '../context/DialogueContext';
 
-interface Civilization {
+export interface Civilization {
     name: string;
     population: number;
     military_strength: number;
     type: CivilizationType;
 }
 
-const CIVILIZATIONS: number = 5;
+const NUM_CIVS = 5;
+const MAX_STRENGTH = 5;
+const MAX_POPULATION = 200;
+const POP_TO_STRENGTH = 1 / 10;
 
-//Civ Adjustments
-const max_strength = 5
-const max_population = 200
-
-const pop_to_strength_factor = 1 / 10
-
-export const neighboring_civilizations: Civilization[] = localStorage.getItem("neighboring_civilizations") ? JSON.parse(localStorage.getItem("neighboring_civilizations")!)
-    : generateCivilizations()
-
-// --------------------------------------------------------
-
-//Create a list of procedurally generated civ names
-function generateCivilizations(): Civilization[] {
-    const civs: Civilization[] = [];
-    const randomFrom = <T>(arr: T[]): T =>
-        arr[Math.floor(Math.random() * arr.length)];
-    for (let i = 0; i < CIVILIZATIONS; i++) {
-        const CIV_TYPES = Object.values(CivilizationType) as CivilizationType[];
-
-        const type = randomFrom(CIV_TYPES)
-
-        const name = generateCivilizationName(type)
-
-        //Population
-        let population = Math.floor(Math.random() * max_population) + 1
-
-        //Strength
-        let strength = Math.floor(Math.random() * max_strength) + 1
-
-        if (type == CivilizationType.Military) {
-            strength *= 2
+function generateCivs(): Civilization[] {
+    const randomFrom = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+    const CIV_TYPES = Object.values(CivilizationType) as CivilizationType[];
+    return Array.from({ length: NUM_CIVS }, () => {
+        const type = randomFrom(CIV_TYPES);
+        const name = generateCivilizationName(type);
+        let population = Math.floor(Math.random() * MAX_POPULATION) + 1;
+        let strength = Math.floor(Math.random() * MAX_STRENGTH) + 1;
+        if (type === CivilizationType.Military) strength *= 2;
+        if (type === CivilizationType.Primitive) {
+            strength = Math.floor(strength * 0.5);
+            population = Math.floor(population * 0.5);
         }
-        if (type == CivilizationType.Primitive) {
-            strength = Math.floor(strength * 0.5)
-            population = Math.floor(population * 0.5)
-        }
+        strength *= Math.max(Math.floor(POP_TO_STRENGTH * population), 1);
+        return { name, population, military_strength: strength, type };
+    });
+}
 
-        strength *= Math.max(Math.floor((pop_to_strength_factor) * population), 1)
+interface ConquestState {
+    civs: Civilization[];
+}
 
-        civs.push({
-            name: `${name}`,
-            population: population,
-            military_strength: strength,
-            type: type
-        });
+export const useConquestStore = create<ConquestState>()(
+    persist(
+        () => ({ civs: generateCivs() }),
+        { name: 'neighboringCivs' }
+    )
+);
+
+export function runCivEvents() {
+    const { civs } = useConquestStore.getState();
+    if (civs.length < 2) return;
+    const randomFrom = <T>(arr: T[]): T => arr[Math.floor(Math.random() * arr.length)];
+
+    if (Math.random() < 0.01) {
+        const civ1 = randomFrom(civs);
+        const others = civs.filter(c => c !== civ1);
+        if (!others.length) return;
+        const civ2 = randomFrom(others);
+
+        const dom = civ1.military_strength >= civ2.military_strength ? civ1 : civ2;
+        const sub = dom === civ1 ? civ2 : civ1;
+        const domLoss = Math.floor(dom.population * 0.1);
+        const subLoss = Math.floor(sub.population * 0.5);
+
+        addEvent(`${civ1.name} warred with ${civ2.name}`);
+        addEvent(`${dom.name} lost ${domLoss}, ${sub.name} lost ${subLoss}`);
+
+        useConquestStore.setState(s => ({
+            civs: s.civs.map(c => {
+                if (c.name === dom.name) return { ...c, population: Math.max(0, c.population - domLoss) };
+                if (c.name === sub.name) return { ...c, population: Math.max(0, c.population - subLoss) };
+                return c;
+            })
+        }));
     }
-    localStorage.setItem("neighboring_civilizations", JSON.stringify(civs))
-    return civs;
 }
-
-// --------------------------------------------------------
-
-interface CivEvent {
-    id: string
-    chance: number
-    action: (civ1: Civilization, civ2: Civilization) => void;
-}
-
-const civEvents: CivEvent[] = [
-    {
-        id: "war",
-        chance: 0.01,
-        action: (civ1, civ2) => {
-            // add_event(`${civ1.name} warred with ${civ2.name}`)
-
-            const dominant_civ = civ1.military_strength > civ2.military_strength ? civ1 : civ2
-            const subordinate_civ = dominant_civ === civ1 ? civ2 : civ1
-
-            const dominant_losses = Math.floor(dominant_civ.population * 0.1)
-            const subordinate_losses = Math.floor(subordinate_civ.population * 0.5)
-
-            dominant_civ.population -= dominant_losses
-            subordinate_civ.population -= subordinate_losses
-
-
-
-            setTimeout(() => {
-                // add_event(`${dominant_civ.name} lost ${dominant_losses}, ${subordinate_civ.name} lost ${subordinate_losses}`)
-                // drawCivilizations()
-            }, 500)
-        }
-    },
-    {
-        id: "war",
-        chance: 0.01,
-        action: (civ1, civ2) => {
-            // add_event(`${civ1.name} warred with ${civ2.name}`)
-
-            const dominant_civ = civ1.military_strength > civ2.military_strength ? civ1 : civ2
-            const subordinate_civ = dominant_civ === civ1 ? civ2 : civ1
-
-            const dominant_losses = Math.floor(dominant_civ.population * 0.1)
-            const subordinate_losses = Math.floor(subordinate_civ.population * 0.5)
-
-            dominant_civ.population -= dominant_losses
-            subordinate_civ.population -= subordinate_losses
-
-
-
-            setTimeout(() => {
-                // add_event(`${dominant_civ.name} lost ${dominant_losses}, ${subordinate_civ.name} lost ${subordinate_losses}`)
-                // drawCivilizations()
-            }, 500)
-        }
-    }
-]
-
-setInterval(() => {
-    const randomFrom = <T>(arr: T[]): T =>
-        arr[Math.floor(Math.random() * arr.length)];
-    civEvents.forEach((e) => {
-        const civ1 = randomFrom(neighboring_civilizations)
-        const civ2 = randomFrom(neighboring_civilizations.filter(c => c !== civ1))
-        if (Math.random() < e.chance) {
-            e.action(civ1, civ2)
-        }
-    })
-}, 1000);
-
-export function init(): void {
-}
-

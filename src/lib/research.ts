@@ -1,6 +1,6 @@
-import { changeValue, useGameStore, type GameState } from "../context/GameContext";
+import { changeValue, useGameStore} from "../context/GameContext";
 
-interface Technology {
+export interface Technology {
     id: string;
     display: string;
     description: string;
@@ -11,7 +11,7 @@ interface Technology {
     y?: number;
 }
 
-const technologies: Array<Technology> = [
+export const technologies: Array<Technology> = [
     {
         id: "metal_working",
         display: "Metal Working",
@@ -45,7 +45,7 @@ const technologies: Array<Technology> = [
         display: "Pottery",
         researchCost: 10,
         action: () => {
-
+            document.body.classList.add("tech-pottery");
         },
         description: "Pottery"
     },
@@ -56,6 +56,11 @@ export const unlocked_technologies: Record<string, boolean> = stored_unlocked
     ? JSON.parse(stored_unlocked)
     : Object.fromEntries(technologies.map(tech => [tech.id, false]));
 
+technologies.forEach(tech => {
+    if (unlocked_technologies[tech.id]) {
+        tech.action();
+    }
+});
 
 export function unlockTechnology(tech: Technology): void {
     let can_unlock: boolean = true
@@ -73,7 +78,7 @@ export function unlockTechnology(tech: Technology): void {
         unlocked_technologies[tech.id] = true
         localStorage.setItem("unlocked_technologies", JSON.stringify(unlocked_technologies));
         
-        changeValue(tech.id as keyof GameState, tech.researchCost)
+        changeValue("research_points", -tech.researchCost)
 
         tech.action()
     }
