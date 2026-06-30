@@ -1,7 +1,8 @@
 # Epoch
 Epoch is a text-based web game centered around expanding a prosperous civilization. Make homes, forage, and research to develop your society. Made for the Horizons Hack Club Event
 
-
+# Play
+https://noahweddles.github.io/epoch/
 
 ## Features
 - Grow your population
